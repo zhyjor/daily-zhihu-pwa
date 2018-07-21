@@ -3,9 +3,10 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import DrawerLayout from 'vue-drawer-layout'
 
 Vue.config.productionTip = false
-
+Vue.use(DrawerLayout)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
