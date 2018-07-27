@@ -7,10 +7,10 @@
     @slide-end="handleSlideEnd"
     @mask-click="handleMaskClick">
     <div class="drawer" slot="drawer">
-      <div class="text">This is drawer</div>
+      <drawer/>
     </div>
     <div class="content" slot="content">
-      <render-titile class="up-title"/>
+      <render-titile @more="showDrow" class="up-title"/>
       <!--<slide-render class="up-slide"/>-->
       <!--<simple-scroll class="down-scroll"/>-->
     </div>
@@ -22,6 +22,7 @@ import NewsItem from '../components/NewsItem'
 import SimpleScroll from '../components/SimpleScroll'
 import SlideRender from '../components/SlideRender'
 import RenderTitile from '../components/RenderTitile'
+import Drawer from '../components/Drawer'
 
 export default {
   name: 'HelloWorld',
@@ -34,9 +35,14 @@ export default {
     NewsItem,
     SimpleScroll,
     SlideRender,
-    RenderTitile
+    RenderTitile,
+    Drawer
   },
   methods: {
+    showDrow() {
+      console.log('11')
+      this.$refs.drawerLayout.toggle()
+    },
     handleSlideStart() {
       console.info('slide-start')
     },
