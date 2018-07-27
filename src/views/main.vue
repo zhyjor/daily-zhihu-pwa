@@ -1,5 +1,6 @@
 <template>
   <vue-drawer-layout
+    class="main-draw"
     ref="drawerLayout"
     @slide-start="handleSlideStart"
     @slide-move="handleSlideMove"
@@ -9,30 +10,43 @@
       <div class="text">This is drawer</div>
     </div>
     <div class="content" slot="content">
-      <div class="text">This is content.</div>
+      <render-titile class="up-title"/>
+      <!--<slide-render class="up-slide"/>-->
+      <!--<simple-scroll class="down-scroll"/>-->
     </div>
   </vue-drawer-layout>
 </template>
 
 <script>
+import NewsItem from '../components/NewsItem'
+import SimpleScroll from '../components/SimpleScroll'
+import SlideRender from '../components/SlideRender'
+import RenderTitile from '../components/RenderTitile'
+
 export default {
   name: 'HelloWorld',
-  data () {
+  data() {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
   },
+  components: {
+    NewsItem,
+    SimpleScroll,
+    SlideRender,
+    RenderTitile
+  },
   methods: {
-    handleSlideStart () {
+    handleSlideStart() {
       console.info('slide-start')
     },
-    handleSlideMove (position) {
+    handleSlideMove(position) {
       console.info('slide-move', position)
     },
-    handleSlideEnd (visible) {
+    handleSlideEnd(visible) {
       console.info('slide-end', visible)
     },
-    handleMaskClick () {
+    handleMaskClick() {
       console.info('mask-click')
       this.$refs.drawerLayout.toggle(false)
     }
@@ -42,9 +56,21 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped lang="scss" rel="stylesheet/scss">
   .drawer {
     background-color: white;
     height: 100%;
+  }
+
+  .content {
+    .up-slide {
+      height: 30vh;
+    }
+
+    .down-scroll {
+      top: 30vh;
+      height: 70vh;
+    }
+
   }
 </style>

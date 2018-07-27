@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import DrawerLayout from 'vue-drawer-layout'
+import './icons/index' // icon
 
 Vue.config.productionTip = false
 Vue.use(DrawerLayout)
