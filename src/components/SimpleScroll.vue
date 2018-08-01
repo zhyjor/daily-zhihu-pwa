@@ -9,7 +9,11 @@
               :startY="parseInt(startY)"
               @pullingDown="onPullingDown"
               @pullingUp="onPullingUp">
-        <news-item :key="index" v-for="{value,index} in items"></news-item>
+        <news-item v-for="(value,index) in items"
+                   :des="value.title"
+                   :img-url="value.images[0]"
+                   :key="index">
+        </news-item>
       </scroll>
     </div>
   </div>
@@ -20,6 +24,7 @@ import Vue from 'vue'
 import Scroll from './scroll'
 import { ease } from '../common/js/ease'
 import NewsItem from '../components/NewsItem'
+import { getSlideList } from '../api/getSlideList'
 
 export default {
   data() {
@@ -44,9 +49,10 @@ export default {
     }
   },
   created() {
-    for (let i = 0; i < 2; i++) {
-      this.items.push(12222)
-    }
+    getSlideList().then(res => {
+      this.items = res.data.STORIES.stories
+      console.log(this.items[0].title)
+    })
   },
   components: {
     Scroll,
@@ -76,6 +82,9 @@ export default {
     }
   },
   computed: {
+    newsItems: () => {
+      return this.items
+    },
     scrollbarObj: function() {
       return this.scrollbar ? { fade: this.scrollbarFade } : false
     },
@@ -99,30 +108,30 @@ export default {
     onPullingDown() {
       // 模拟更新数据
       setTimeout(() => {
-        if (Math.random() > 0.5) {
-          // 如果有新数据
-          this.items.unshift(1111 + +new Date())
-        } else {
-          // 如果没有新数据
-          this.$refs.scroll.forceUpdate()
-        }
+        // if (Math.random() > 0.5) {
+        //   // 如果有新数据
+        //   this.items.unshift(1111 + +new Date())
+        // } else {
+        //   // 如果没有新数据
+        //   this.$refs.scroll.forceUpdate()
+        // }
       }, 2000)
     },
     onPullingUp() {
       // 更新数据
       console.log('pulling up and load data')
       setTimeout(() => {
-        if (Math.random() > 0.5) {
-          // 如果有新数据
-          let newPage = [1, 2, 3]
-          for (let i = 0; i < 10; i++) {
-            newPage.push(111 + ++this.itemIndex + 1111)
-          }
-          this.items = this.items.concat(newPage)
-        } else {
-          // 如果没有新数据
-          this.$refs.scroll.forceUpdate()
-        }
+        // if (Math.random() > 0.5) {
+        //   // 如果有新数据
+        //   let newPage = [1, 2, 3]
+        //   for (let i = 0; i < 10; i++) {
+        //     newPage.push(111 + ++this.itemIndex + 1111)
+        //   }
+        //   this.items = this.items.concat(newPage)
+        // } else {
+        //   // 如果没有新数据
+        //   this.$refs.scroll.forceUpdate()
+        // }
       }, 1500)
     },
     rebuildScroll() {

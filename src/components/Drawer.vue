@@ -18,9 +18,16 @@
         </div>
       </div>
     </div>
-    <div class="drawer-middle">首页</div>
     <div class="drawer-down">
-      财经日报
+      <div class="drawer-down-first">
+        <svg-icon class="" icon-class="mainpage"/>
+        <span>首页</span>
+      </div>
+      <div class="drawer-down-last" v-for="item in items" :key="item.id">
+        <span>{{item.name}}</span>
+        <svg-icon v-if="item.added" class="drawer-down-last-icon" icon-class="add"/>
+        <svg-icon v-else class="drawer-down-last-icon" icon-class="rightarrow"/>
+      </div>
     </div>
   </div>
 </template>
@@ -32,7 +39,39 @@ export default {
       isShow: true,
       themesList: [],
       toolContent: 'you have added it',
-      showTooltip: false
+      showTooltip: false,
+      items: [
+        {
+          name: '电影日报',
+          id: 0,
+          added: true
+        },
+        {
+          name: '财经日报',
+          id: 1,
+          added: true
+        },
+        {
+          name: '日常心理学',
+          id: 2,
+          added: false
+        },
+        {
+          name: '互联网安全',
+          id: 3,
+          added: true
+        },
+        {
+          name: '音乐日报',
+          id: 4,
+          added: true
+        },
+        {
+          name: '设计日报',
+          id: 5,
+          added: true
+        }
+      ]
     }
   },
   methods: {},
@@ -43,8 +82,8 @@ export default {
   .drawer-wrapper {
     display: flex;
     flex-direction: column;
-    color: white;
     .drawer-up {
+      color: white;
       height: 15vh;
       background: #3b99fc;
       display: flex;
@@ -84,6 +123,29 @@ export default {
         }
         .icon-right-download {
           margin-left: 10px;
+        }
+      }
+    }
+    .drawer-down {
+      .drawer-down-first {
+        display: flex;
+        align-items: center;
+        line-height: 40px;
+        background-color: #eee;
+        color: #3b99fc;
+        padding: 0 20px 0 10px;
+        span{
+          margin-left: 10px;
+        }
+      }
+      .drawer-down-last {
+        display: flex;
+        align-items: center;
+        line-height: 40px;
+        justify-content: space-between;
+        padding: 0 20px 0 10px;
+        .drawer-down-last-icon{
+          color: #aaa;
         }
       }
     }

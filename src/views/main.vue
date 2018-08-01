@@ -11,8 +11,8 @@
     </div>
     <div class="content" slot="content">
       <render-titile @more="showDrow" class="up-title"/>
-      <!--<slide-render class="up-slide"/>-->
-      <!--<simple-scroll class="down-scroll"/>-->
+      <slide-render class="up-slide"/>
+      <simple-scroll class="down-scroll"/>
     </div>
   </vue-drawer-layout>
 </template>
@@ -38,22 +38,26 @@ export default {
     RenderTitile,
     Drawer
   },
+  asyncData({ store, route }) {
+    // 触发 action 后，会返回 Promise
+    return store.dispatch('fetchItem', route.params.id)
+  },
   methods: {
     showDrow() {
       console.log('11')
       this.$refs.drawerLayout.toggle()
     },
     handleSlideStart() {
-      console.info('slide-start')
+      // console.info('slide-start')
     },
     handleSlideMove(position) {
-      console.info('slide-move', position)
+      // console.info('slide-move', position)
     },
     handleSlideEnd(visible) {
-      console.info('slide-end', visible)
+      // console.info('slide-end', visible)
     },
     handleMaskClick() {
-      console.info('mask-click')
+      // console.info('mask-click')
       this.$refs.drawerLayout.toggle(false)
     }
   }
@@ -74,8 +78,8 @@ export default {
     }
 
     .down-scroll {
-      top: 30vh;
-      height: 70vh;
+      top: 31vh;
+      height: 69vh;
     }
 
   }

@@ -2,11 +2,16 @@
   <div class="slide-render-view">
     <div class="slide-wrapper">
       <div class="slide-content">
-        <slide ref="slide" :autoPlay="isAutoPlay" :loop="isLoop" :showDot="isShowDot" :interval="interval"
-               :threshold="threshold" :speed="speed">
-          <div :key="index" v-for="(item,index) in data">
-            <a :href="item.linkUrl">
-              <img :src="item.picUrl">
+        <slide ref="slide"
+               :autoPlay="isAutoPlay"
+               :loop="isLoop"
+               :showDot="isShowDot"
+               :interval="interval"
+               :threshold="threshold"
+               :speed="speed">
+          <div class="image-wrapper" :key="index" v-for="(item,index) in items">
+            <a :href="item.image">
+              <img :src="item.image">
             </a>
           </div>
         </slide>
@@ -17,49 +22,101 @@
 
 <script type="text/ecmascript-6">
 import Slide from './slide.vue'
+import { getSlideList } from '../api/getSlideList'
 
-const items = [
-  [
-    {
-      linkUrl: 'http://y.qq.com/w/album.html?albummid=0044K2vN1sT5mE',
-      picUrl: 'http://y.gtimg.cn/music/photo_new/T003R720x288M000001YCZlY3aBifi.jpg',
-      id: 11351
-    },
-    {
-      linkUrl: 'https://y.qq.com/m/digitalbum/gold/index.html?_video=true&id=2197820&g_f=shoujijiaodian',
-      picUrl: 'http://y.gtimg.cn/music/photo_new/T003R720x288M000004ckGfg3zaho0.jpg',
-      id: 11372
-    }
-  ],
-  [
-    {
-      linkUrl: 'http://y.qq.com/w/album.html?albummid=001tftZs2RX1Qz',
-      picUrl: 'http://y.gtimg.cn/music/photo_new/T003R720x288M00000236sfA406cmk.jpg',
-      id: 11378
-    },
-    {
-      linkUrl: 'https://y.qq.com/msa/218/0_4085.html',
-      picUrl: 'http://y.gtimg.cn/music/photo_new/T003R720x288M000001s0BXx3Zxcwb.jpg',
-      id: 11375
-    },
-    {
-      linkUrl: 'https://y.qq.com/m/digitalbum/gold/index.html?_video=true&id=2195876&g_f=shoujijiaodian',
-      picUrl: 'http://y.gtimg.cn/music/photo_new/T003R720x288M000002cwng4353HKz.jpg',
-      id: 11287
-    }
-  ]
-]
 const COMPONENT_NAME = 'slide-render'
+
 export default {
   name: COMPONENT_NAME,
-  computed: {
-    data() {
-      return items[this.index]
-    }
+  created() {
+    getSlideList().then(res => {
+      console.log(res.data.STORIES.top_stories)
+      // this.items = res.data.STORIES.top_stories
+    })
   },
   data() {
+    // const items = [
+    //   [
+    //     {
+    //       linkUrl: 'http://y.qq.com/w/album.html?albummid=0044K2vN1sT5mE',
+    //       picUrl: 'http://y.gtimg.cn/music/photo_new/T003R720x288M000001YCZlY3aBifi.jpg',
+    //       id: 11351
+    //     },
+    //     {
+    //       linkUrl: 'https://y.qq.com/m/digitalbum/gold/index.html?_video=true&id=2197820&g_f=shoujijiaodian',
+    //       picUrl: 'http://y.gtimg.cn/music/photo_new/T003R720x288M000004ckGfg3zaho0.jpg',
+    //       id: 11372
+    //     }
+    //   ],
+    //   [
+    //     {
+    //       linkUrl: 'http://y.qq.com/w/album.html?albummid=001tftZs2RX1Qz',
+    //       picUrl: 'http://y.gtimg.cn/music/photo_new/T003R720x288M00000236sfA406cmk.jpg',
+    //       id: 11378
+    //     },
+    //     {
+    //       linkUrl: 'https://y.qq.com/msa/218/0_4085.html',
+    //       picUrl: 'http://y.gtimg.cn/music/photo_new/T003R720x288M000001s0BXx3Zxcwb.jpg',
+    //       id: 11375
+    //     },
+    //     {
+    //       linkUrl: 'https://y.qq.com/m/digitalbum/gold/index.html?_video=true&id=2195876&g_f=shoujijiaodian',
+    //       picUrl: 'http://y.gtimg.cn/music/photo_new/T003R720x288M000002cwng4353HKz.jpg',
+    //       id: 11287
+    //     }
+    //   ],
+    //   [
+    //     {
+    //       linkUrl: 'http://y.qq.com/w/album.html?albummid=001tftZs2RX1Qz',
+    //       picUrl: 'https://pic3.zhimg.com/v2-0637200fde4c16933bba3139673d3136.jpg',
+    //       id: 11378
+    //     },
+    //     {
+    //       linkUrl: 'https://y.qq.com/msa/218/0_4085.html',
+    //       picUrl: 'https://pic1.zhimg.com/v2-60c8fb8d3de2e33717b83d3d635e80f4.jpg',
+    //       id: 11375
+    //     },
+    //     {
+    //       linkUrl: 'https://y.qq.com/m/digitalbum/gold/index.html?_video=true&id=2195876&g_f=shoujijiaodian',
+    //       picUrl: 'https://pic2.zhimg.com/v2-b8f443052766f520838b125e26427939.jpg',
+    //       id: 11287
+    //     }
+    //   ],
+    //   [
+    //     {
+    //       ga_prefix: '080110',
+    //       id: 9691696,
+    //       image: 'https://pic3.zhimg.com/v2-0637200fde4c16933bba3139673d3136.jpg',
+    //       title: '「电影理财」收益率高达 388 ％，P2P 都不敢这么干',
+    //       type: 0
+    //     },
+    //     {
+    //       ga_prefix: '080111',
+    //       id: 9691691,
+    //       image: 'https://pic3.zhimg.com/v2-0637200fde4c16933bba3139673d3136.jpg',
+    //       title: '「电影理财」收益率高达 388 ％，P2P 都不敢这么干',
+    //       type: 0
+    //     }
+    //   ]
+    // ]
+    let items = [
+      {
+        ga_prefix: '080110',
+        id: 9691696,
+        image: 'https://pic3.zhimg.com/v2-0637200fde4c16933bba3139673d3136.jpg',
+        title: '「电影理财」收益率高达 388 ％，P2P 都不敢这么干',
+        type: 0
+      },
+      {
+        ga_prefix: '080111',
+        id: 9691691,
+        image: 'https://pic3.zhimg.com/v2-0637200fde4c16933bba3139673d3136.jpg',
+        title: '「电影理财」收益率高达 388 ％，P2P 都不敢这么干',
+        type: 0
+      }
+    ]
     return {
-      index: 0,
+      index: 1,
       turnToPrev: false,
       turnToNext: false,
       isAutoPlay: true,
@@ -67,7 +124,8 @@ export default {
       isShowDot: true,
       speed: 400,
       threshold: 0.3,
-      interval: 4000
+      interval: 4000,
+      items
     }
   },
   methods: {
