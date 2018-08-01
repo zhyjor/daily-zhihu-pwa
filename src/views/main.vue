@@ -11,7 +11,7 @@
     </div>
     <div class="content" slot="content">
       <render-titile @more="showDrow" class="up-title"/>
-      <slide-render class="up-slide"/>
+      <slide-render :slide-arr="topData" class="up-slide"/>
       <simple-scroll class="down-scroll"/>
     </div>
   </vue-drawer-layout>
@@ -23,13 +23,20 @@ import SimpleScroll from '../components/SimpleScroll'
 import SlideRender from '../components/SlideRender'
 import RenderTitile from '../components/RenderTitile'
 import Drawer from '../components/Drawer'
+import { getSlideList } from '../api/getSlideList'
 
 export default {
   name: 'HelloWorld',
   data() {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
+      topData: []
     }
+  },
+  created() {
+    getSlideList().then(res => {
+      this.topData = res.data.STORIES.stories
+    })
   },
   components: {
     NewsItem,
