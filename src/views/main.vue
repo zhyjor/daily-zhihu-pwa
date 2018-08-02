@@ -23,7 +23,7 @@ import SimpleScroll from '../components/SimpleScroll'
 import SlideRender from '../components/SlideRender'
 import RenderTitile from '../components/RenderTitile'
 import Drawer from '../components/Drawer'
-import { getSlideList } from '../api/getSlideList'
+// import { getSlideList } from '../api/getSlideList'
 
 export default {
   name: 'HelloWorld',
@@ -34,9 +34,9 @@ export default {
     }
   },
   created() {
-    getSlideList().then(res => {
-      this.topData = res.data.STORIES.stories
-    })
+    // getSlideList().then(res => {
+    //   this.topData = res.data.STORIES.stories
+    // })
   },
   components: {
     NewsItem,

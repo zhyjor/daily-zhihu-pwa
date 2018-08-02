@@ -24,6 +24,7 @@ import Vue from 'vue'
 import Scroll from './scroll'
 import { ease } from '../common/js/ease'
 import NewsItem from '../components/NewsItem'
+import { getSlideList } from '../api/getSlideList'
 
 export default {
   data() {
@@ -46,6 +47,12 @@ export default {
       items: [],
       itemIndex: 0
     }
+  },
+  created() {
+    getSlideList().then(res => {
+      console.log(res.data.STORIES.top_stories)
+      this.$set(this.$data, 'items', res.data.STORIES.stories)
+    })
   },
   components: {
     Scroll,

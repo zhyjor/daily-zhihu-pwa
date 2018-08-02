@@ -220,6 +220,8 @@ export default {
           text-decoration: none;
         }
         img {
+          position: relative;
+          top: -80px;
           display: block;
           width: 100%;
         }

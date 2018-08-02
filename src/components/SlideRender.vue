@@ -9,7 +9,7 @@
                :interval="interval"
                :threshold="threshold"
                :speed="speed">
-          <div class="image-wrapper" :key="index" v-for="(item,index) in arr">
+          <div class="image-wrapper" :key="index" v-for="(item,index) in items">
             <a :href="item.image">
               <img :src="item.image">
             </a>
@@ -30,83 +30,14 @@ export default {
   created() {
     getSlideList().then(res => {
       console.log(res.data.STORIES.top_stories)
-      this.$set(this.$data, 'arr', res.data.STORIES.top_stories)
-      // this.items = res.data.STORIES.top_stories
+      this.$set(this.$data, 'items', res.data.STORIES.top_stories)
+      this.$refs.slide.update()
     })
-
-    // setTimeout(() => {
-    //   console.log('修改index')
-    //   this.arr = this.itemss[0]
-    //   this.$refs.slide.update()
-    // }, 3000)
-    // setTimeout(() => {
-    //   console.log('修改index')
-    //   this.arr.push({
-    //     linkUrl: 'http://y.qq.com/w/album.html?albummid=0044K2vN1sT5mE',
-    //     picUrl: 'http://y.gtimg.cn/music/photo_new/T003R720x288M000001YCZlY3aBifi.jpg',
-    //     id: 11351
-    //   })
-    //   this.$refs.slide.update()
-    // }, 6000)
   },
   props: {
     slideArr: {}
   },
   data() {
-    let itemss = [
-      [
-        {
-          linkUrl: 'http://y.qq.com/w/album.html?albummid=0044K2vN1sT5mE',
-          picUrl: 'http://y.gtimg.cn/music/photo_new/T003R720x288M000001YCZlY3aBifi.jpg',
-          id: 11351
-        },
-        {
-          linkUrl: 'https://y.qq.com/m/digitalbum/gold/index.html?_video=true&id=2197820&g_f=shoujijiaodian',
-          picUrl: 'http://y.gtimg.cn/music/photo_new/T003R720x288M000004ckGfg3zaho0.jpg',
-          id: 11372
-        }
-      ],
-      [
-        {
-          linkUrl: 'http://y.qq.com/w/album.html?albummid=001tftZs2RX1Qz',
-          picUrl: 'http://y.gtimg.cn/music/photo_new/T003R720x288M00000236sfA406cmk.jpg',
-          id: 11378
-        },
-        {
-          linkUrl: 'https://y.qq.com/msa/218/0_4085.html',
-          picUrl: 'http://y.gtimg.cn/music/photo_new/T003R720x288M000001s0BXx3Zxcwb.jpg',
-          id: 11375
-        },
-        {
-          linkUrl: 'https://y.qq.com/m/digitalbum/gold/index.html?_video=true&id=2195876&g_f=shoujijiaodian',
-          picUrl: 'http://y.gtimg.cn/music/photo_new/T003R720x288M000002cwng4353HKz.jpg',
-          id: 11287
-        }
-      ]
-    ]
-    let items = [
-      {
-        ga_prefix: '080110',
-        id: 9691696,
-        picUrl: 'https://pic3.zhimg.com/v2-0637200fde4c16933bba3139673d3136.jpg',
-        title: '「电影理财」收益率高达 388 ％，P2P 都不敢这么干',
-        type: 0
-      },
-      {
-        ga_prefix: '080111',
-        id: 9691691,
-        picUrl: 'https://pic3.zhimg.com/v2-0637200fde4c16933bba3139673d3136.jpg',
-        title: '「电影理财」收益率高达 388 ％，P2P 都不敢这么干',
-        type: 0
-      },
-      {
-        ga_prefix: '080111',
-        id: 9691691,
-        picUrl: 'https://pic3.zhimg.com/v2-0637200fde4c16933bba3139673d3136.jpg',
-        title: '「电影理财」收益率高达 388 ％，P2P 都不敢这么干',
-        type: 0
-      }
-    ]
     return {
       index: 1,
       turnToPrev: false,
@@ -117,9 +48,7 @@ export default {
       speed: 400,
       threshold: 0.3,
       interval: 4000,
-      items,
-      itemss,
-      arr: []
+      items: []
     }
   },
   methods: {
