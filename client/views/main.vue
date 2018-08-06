@@ -23,6 +23,7 @@ import SimpleScroll from '../components/SimpleScroll'
 import SlideRender from '../components/SlideRender'
 import RenderTitile from '../components/RenderTitile'
 import Drawer from '../components/Drawer'
+import { mapActions } from 'vuex'
 // import { getSlideList } from '../api/getSlideList'
 
 export default {
@@ -34,9 +35,7 @@ export default {
     }
   },
   created() {
-    // getSlideList().then(res => {
-    //   this.topData = res.data.STORIES.stories
-    // })
+    this.getLists()
   },
   components: {
     NewsItem,
@@ -50,6 +49,12 @@ export default {
     return store.dispatch('fetchItem', route.params.id)
   },
   methods: {
+    getLists() {
+      this.getListNews()
+    },
+    ...mapActions([
+      'getListNews'
+    ]),
     showDrow() {
       console.log('11')
       this.$refs.drawerLayout.toggle()

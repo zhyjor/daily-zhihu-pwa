@@ -9,7 +9,7 @@
                :interval="interval"
                :threshold="threshold"
                :speed="speed">
-          <div class="image-wrapper" :key="index" v-for="(item,index) in items">
+          <div class="image-wrapper" :key="index" v-for="(item,index) in upImgs">
             <a :href="item.image">
               <img :src="item.image">
             </a>
@@ -22,20 +22,20 @@
 
 <script type="text/ecmascript-6">
 import Slide from './slide.vue'
-import { getSlideList } from '../api/getSlideList'
+import { mapGetters } from 'vuex'
 
 const COMPONENT_NAME = 'slide-render'
 export default {
   name: COMPONENT_NAME,
   created() {
-    getSlideList().then(res => {
-      console.log(res.data.STORIES.top_stories)
-      this.$set(this.$data, 'items', res.data.STORIES.top_stories)
-      this.$refs.slide.update()
-    })
   },
   props: {
     slideArr: {}
+  },
+  computed: {
+    ...mapGetters({
+      upImgs: 'upImgs'
+    })
   },
   data() {
     return {
@@ -47,8 +47,7 @@ export default {
       isShowDot: true,
       speed: 400,
       threshold: 0.3,
-      interval: 4000,
-      items: []
+      interval: 4000
     }
   },
   methods: {
@@ -100,6 +99,9 @@ export default {
   },
   watch: {
     index() {
+      this.$refs.slide.update()
+    },
+    upImgs() {
       this.$refs.slide.update()
     }
   },

@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import DrawerLayout from 'vue-drawer-layout'
 import './icons/index' // icon
+import store from './store/'
 
 Vue.config.productionTip = false
 Vue.use(DrawerLayout)
@@ -12,6 +13,7 @@ Vue.use(DrawerLayout)
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

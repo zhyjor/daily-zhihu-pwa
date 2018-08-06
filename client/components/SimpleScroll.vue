@@ -9,7 +9,7 @@
               :startY="parseInt(startY)"
               @pullingDown="onPullingDown"
               @pullingUp="onPullingUp">
-        <news-item v-for="(value,index) in items"
+        <news-item v-for="(value,index) in downArr"
                    :des="value.title"
                    :img-url="value.images[0]"
                    :key="index">
@@ -24,7 +24,7 @@ import Vue from 'vue'
 import Scroll from './scroll'
 import { ease } from '../common/js/ease'
 import NewsItem from '../components/NewsItem'
-import { getSlideList } from '../api/getSlideList'
+import { mapGetters } from 'vuex'
 
 export default {
   data() {
@@ -47,12 +47,6 @@ export default {
       items: [],
       itemIndex: 0
     }
-  },
-  created() {
-    getSlideList().then(res => {
-      console.log(res.data.STORIES.top_stories)
-      this.$set(this.$data, 'items', res.data.STORIES.stories)
-    })
   },
   components: {
     Scroll,
@@ -82,6 +76,9 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      downArr: 'downArr'
+    }),
     newsItems: () => {
       return this.items
     },
