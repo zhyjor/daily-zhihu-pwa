@@ -1,13 +1,17 @@
-import Vue from 'vue'
 import Vuex from 'vuex'
 import newsList from './modules/newsList'
 import * as getters from './getters'
 
-Vue.use(Vuex)
+const isDev = process.env.NODE_ENV === 'development'
 
-export default new Vuex.Store({
-  getters,
-  modules: {
-    newsList
-  }
-})
+export default () => {
+  const store = new Vuex.Store({
+    strict: isDev,
+    getters,
+    modules: {
+      newsList
+    }
+  })
+  return store
+}
+

@@ -10,7 +10,9 @@
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "test": "npm run unit",
     "lint": "eslint --ext .js,.vue src test/unit",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "dev:client": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.client.js",
+    "dev:server": "nodemon server/server.js"
   },
   "dependencies": {
     "axios": "^0.17.1",
@@ -22,6 +24,7 @@
     "koa-session": "^5.8.1",
     "sha1": "^1.1.1",
     "better-scroll": "^1.12.5",
+    "vue-meta": "^1.4.3",
     "vue": "^2.5.2",
     "vue-drawer-layout": "^0.3.2",
     "vue-router": "^3.0.1",
@@ -72,6 +75,7 @@
     "husky": "^0.14.3",
     "memory-fs": "^0.4.1",
     "mocha": "^3.2.0",
+    "nodemon": "^1.14.12",
     "node-notifier": "^5.1.2",
     "node-sass": "^4.9.2",
     "optimize-css-assets-webpack-plugin": "^3.2.0",

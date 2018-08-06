@@ -64,6 +64,7 @@ if (isDev) {
   // pageRouter = require('./routers/ssr')
   pageRouter = require('./routers/ssr-no-bundle')
 }
+// router的用法
 app.use(pageRouter.routes()).use(pageRouter.allowedMethods())
 
 const HOST = process.env.HOST || '0.0.0.0'

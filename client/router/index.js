@@ -1,15 +1,26 @@
-import Vue from 'vue'
 import Router from 'vue-router'
 import main from '@/views/main'
 
-Vue.use(Router)
-
-export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'main',
-      component: main
+export default () => {
+  return new Router({
+    routes: [
+      {
+        path: '/',
+        name: 'main',
+        component: main
+      }
+    ],
+    mode: 'history',
+    // base: '/base/',
+    linkActiveClass: 'active-link',
+    linkExactActiveClass: 'exact-active-link',
+    scrollBehavior (to, from, savedPosition) {
+      if (savedPosition) {
+        return savedPosition
+      } else {
+        return { x: 0, y: 0 }
+      }
     }
-  ]
-})
+  })
+}
+
