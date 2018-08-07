@@ -1,5 +1,5 @@
 import Router from 'vue-router'
-import main from '@/views/main'
+const main = () => import('../views/main')
 
 export default () => {
   return new Router({
@@ -14,7 +14,7 @@ export default () => {
     // base: '/base/',
     linkActiveClass: 'active-link',
     linkExactActiveClass: 'exact-active-link',
-    scrollBehavior (to, from, savedPosition) {
+    scrollBehavior(to, from, savedPosition) {
       if (savedPosition) {
         return savedPosition
       } else {

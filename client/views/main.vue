@@ -34,7 +34,11 @@ export default {
       topData: []
     }
   },
-  created() {
+  asyncData({ store, route }) {
+    // 触发action
+    return store.dispatch('getListNews')
+  },
+  mounted() {
     this.getLists()
   },
   components: {
@@ -43,10 +47,6 @@ export default {
     SlideRender,
     RenderTitile,
     Drawer
-  },
-  asyncData({ store, route }) {
-    // 触发 action 后，会返回 Promise
-    return store.dispatch('fetchItem', route.params.id)
   },
   methods: {
     getLists() {
