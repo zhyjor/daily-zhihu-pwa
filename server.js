@@ -11,18 +11,19 @@ const renderer = createBundleRenderer(require('./dist/vue-ssr-server-bundle.json
   // 推荐
   runInNewContext: false,
   // 模板html文件
-  template: fs.readFileSync(resolve('./index.html'), 'utf-8'),
+  template: fs.readFileSync(resolve('./index.template.html'), 'utf-8'),
   // client manifest
   clientManifest: require('./dist/vue-ssr-client-manifest.json')
 })
 
-function renderToString (context) {
+function renderToString(context) {
   return new Promise((resolve, reject) => {
     renderer.renderToString(context, (err, html) => {
       err ? reject(err) : resolve(html)
     })
   })
 }
+
 app.use(require('koa-static')(resolve('./dist')))
 // response
 app.use(async (ctx, next) => {
@@ -33,12 +34,14 @@ app.use(async (ctx, next) => {
     }
     // 将服务器端渲染好的html返回给客户端
     ctx.body = await renderToString(context)
-
     // 设置请求头
     ctx.set('Content-Type', 'text/html')
     ctx.set('Server', 'Koa2 server side render')
   } catch (e) {
     // 如果没找到，放过请求，继续运行后面的中间件
+    ctx.body = e.toString()
+    ctx.set('Content-Type', 'text/html')
+    ctx.set('Server', 'Koa2 server side render')
     next()
   }
 })

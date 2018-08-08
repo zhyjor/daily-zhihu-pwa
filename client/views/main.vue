@@ -1,5 +1,5 @@
 <template>
-  <vue-drawer-layout
+  <draw-layout
     class="main-draw"
     ref="drawerLayout"
     @slide-start="handleSlideStart"
@@ -14,20 +14,20 @@
       <slide-render :slide-arr="topData" class="up-slide"/>
       <simple-scroll class="down-scroll"/>
     </div>
-  </vue-drawer-layout>
+  </draw-layout>
 </template>
 
 <script>
 import NewsItem from '../components/NewsItem'
 import SimpleScroll from '../components/SimpleScroll'
 import SlideRender from '../components/SlideRender'
+import DrawLayout from '../components/DrawerLayout'
 import RenderTitile from '../components/RenderTitile'
 import Drawer from '../components/Drawer'
 import { mapActions } from 'vuex'
-// import { getSlideList } from '../api/getSlideList'
 
 export default {
-  name: 'HelloWorld',
+  name: 'helloworld',
   data() {
     return {
       msg: 'Welcome to Your Vue.js App',
@@ -45,6 +45,7 @@ export default {
     NewsItem,
     SimpleScroll,
     SlideRender,
+    DrawLayout,
     RenderTitile,
     Drawer
   },

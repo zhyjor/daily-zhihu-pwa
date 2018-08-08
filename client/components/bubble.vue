@@ -25,7 +25,8 @@ export default {
     }
   },
   created() {
-    this.ratio = window.devicePixelRatio
+    // this.ratio = window.devicePixelRatio
+    this.ratio = 3
     this.width *= this.ratio
     this.height *= this.ratio
     this.initRadius = 18 * this.ratio

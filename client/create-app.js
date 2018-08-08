@@ -1,21 +1,18 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Vuex from 'vuex'
-import Meta from 'vue-meta'
+// import Meta from 'vue-meta'
 
 import App from './app.vue'
 import createStore from './store/'
 import createRouter from './router/'
 
-import DrawerLayout from 'vue-drawer-layout'
 import './icons/index' // icon
 
 // import './assets/styles/global.styl'
-Vue.use(DrawerLayout)
 Vue.use(VueRouter)
 Vue.use(Vuex)
-Vue.use(Meta)
-
+// Vue.use(Meta)
 
 Vue.mixin({
   beforeMount() {

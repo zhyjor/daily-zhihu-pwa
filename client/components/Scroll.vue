@@ -160,7 +160,7 @@ export default {
         return
       }
       if (this.$refs.listWrapper && (this.pullDownRefresh || this.pullUpLoad)) {
-        this.$refs.listWrapper.style.minHeight = `${getRect(this.$refs.wrapper).height + 1}px`
+        // this.$refs.listWrapper.style.minHeight = `${getRect(this.$refs.wrapper).height + 1}px`
       }
       let options = {
         probeType: this.probeType,

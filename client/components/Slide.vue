@@ -55,22 +55,22 @@ export default {
   },
   mounted() {
     this.update()
-    window.addEventListener('resize', () => {
-      if (!this.slide || !this.slide.enabled) {
-        return
-      }
-      clearTimeout(this.resizeTimer)
-      this.resizeTimer = setTimeout(() => {
-        if (this.slide.isInTransition) {
-          this._onScrollEnd()
-        } else {
-          if (this.autoPlay) {
-            this._play()
-          }
-        }
-        this.refresh()
-      }, 60)
-    })
+    // window.addEventListener('resize', () => {
+    //   if (!this.slide || !this.slide.enabled) {
+    //     return
+    //   }
+    //   clearTimeout(this.resizeTimer)
+    //   this.resizeTimer = setTimeout(() => {
+    //     if (this.slide.isInTransition) {
+    //       this._onScrollEnd()
+    //     } else {
+    //       if (this.autoPlay) {
+    //         this._play()
+    //       }
+    //     }
+    //     this.refresh()
+    //   }, 60)
+    // })
   },
   activated() {
     if (!this.slide) {
