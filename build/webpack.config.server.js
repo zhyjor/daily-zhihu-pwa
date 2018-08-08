@@ -23,7 +23,7 @@ if (isDev) {
 
 config = merge(baseConfig, {
   target: 'node',// 必须的运行环境
-  entry: path.join(__dirname, '../client/server-entry.js'),
+  entry: path.join(__dirname, '../src/server-entry.js'),
   devtool: 'source-map',
   output: {
     libraryTarget: 'commonjs2',// node js的模块系统
@@ -56,7 +56,7 @@ config = merge(baseConfig, {
 
 config.resolve = {
   alias: {
-    'model': path.join(__dirname, '../client/model/server-model.js')
+    'model': path.join(__dirname, '../src/model/server-model.js')
   }
 }
 

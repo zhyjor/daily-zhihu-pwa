@@ -1,6 +1,11 @@
 # daily-zhihu-pwa
 
-> A Vue.js project
+一个用来测试pwa和ssr的vue知乎日报项目
+
+## 分支
+**master:** 普通的vue项目分支
+**ssr:**	服务器渲染测试分支
+**pwa：**	pwa测试分支
 
 ## Build Setup
 
